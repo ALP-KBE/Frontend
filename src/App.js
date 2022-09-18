@@ -1,45 +1,44 @@
 import React, {useState, useEffect} from 'react';
-import MainScreen from "./components/MainScreen";
-import LogInScreen from "./components/LogInScreen";
+import {ReactKeycloakProvider} from "@react-keycloak/web";
+import keycloak from "./keycloak"
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Nav from "./components/Nav";
+import WelcomePage from "./pages/Homepage";
+import SecuredPage from "./pages/Securedpage";
+import PrivateRoute from "./helpers/PrivateRoute";
 
 const App = () => {
-  const [users, setUsers] = useState([{
-        username: 'someUser',
-        password: 'somePassword'
-    },
-    {
-        username: 'admin',
-        password: 'adminPassword'
-    }])
 
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [loggedInUser, setLoggedInUser] = useState(
-      {
-          username: '',
-      }
-  )
+    const [components, setComponents] = useState('');
 
-  const [components, setComponents] = useState('');
+    useEffect(() => {
+        fetch('/components')
+            .then(response => response.text())
+            .then(components => {
+                setComponents(components);
+            });
+    }, [])
 
-  useEffect(() => {
-    fetch('/components')
-        .then(response => response.text())
-        .then(components => {
-            setComponents(components);
-        });
-  },[])
-  return (
-      <div>
-          {loggedIn && <MainScreen loggedInUser={loggedInUser}
-                                    logOut={() => {
-                                        setLoggedIn(false)
-                                        setLoggedInUser({username: '',})
-                                        }
-                                    }
-                                    components={components}/>}
-          {!loggedIn && <LogInScreen users={users} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser}/>}
-      </div>
-  )
+    return (
+        <div>
+            <ReactKeycloakProvider authClient={keycloak}>
+                <Nav />
+                <BrowserRouter>
+                    <Routes>
+                        <Route exact path="/" element={<WelcomePage />} />
+                        <Route
+                            path="/secured"
+                            element={
+                                <PrivateRoute>
+                                    <SecuredPage components={components}/>
+                                </PrivateRoute>
+                            }
+                        />
+                    </Routes>
+                </BrowserRouter>
+            </ReactKeycloakProvider>
+        </div>
+    )
 }
 
 export default App;
