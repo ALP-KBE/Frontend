@@ -1,18 +1,13 @@
 import React, {useState} from "react";
-import Button from "./Button";
-
-const MainScreen = ({loggedInUser,logOut,components}) => {
+import Button from "../components/Button";
+import Nav from "../components/Nav"
+const Securedpage = ({loggedInUser,logOut,components}) => {
 
     const [allProductComponentsAreShown, setAllProductComponentsAreShown] = useState(false)
 
     return (
 
         <div>
-            <div className="header">
-                <h1>Guitarbuilder</h1>
-                <h2>Welcome {loggedInUser}</h2>
-                <Button text={'log out'} onClick={logOut}/>
-            </div>
             <Button text={'Unsere Produkte'}/>
             <Button text={'Alle Produktkomponenten anzeigen'} onClick={() => {
                 setAllProductComponentsAreShown(true)
@@ -26,4 +21,4 @@ const MainScreen = ({loggedInUser,logOut,components}) => {
     )
 }
 
-export default MainScreen
+export default Securedpage
