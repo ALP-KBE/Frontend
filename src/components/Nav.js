@@ -7,37 +7,26 @@ const Nav = () => {
 
     return (
         <div>
-            <nav>
-                <div className="header">
-                    <h1>
-                        GuitarBuilder
-                    </h1>
-                    <div>
-                        <div>
-                            {!keycloak.authenticated && (
-                                <Button
-                                    text={'log in'}
-                                    type="button"
-                                    className="text-blue-800"
-                                    onClick={() => keycloak.login()}
-                                >
-                                    Login
-                                </Button>
-                            )}
-                            {!!keycloak.authenticated && (
-                                <Button
-                                    text={'log out'}
-                                    type="button"
-                                    className="text-blue-800"
-                                    onClick={() => keycloak.logout()}
-                                >
-                                    Logout ({keycloak.tokenParsed.preferred_username})
-                                </Button>
-                            )}
-                        </div>
-                    </div>
+            <h1 className="header">
+                Guitar Builder
+                <div>
+                    {!keycloak.authenticated && (
+                        <Button
+                            onClick={() => {keycloak.login();}}
+                            text={'Login'}
+                        >
+                        </Button>
+                    )}
+
+                    {!!keycloak.authenticated && (
+                        <Button
+                            text={'Logout'}
+                            onClick={() => keycloak.logout()}>
+                            Logout ({keycloak.tokenParsed.preferred_username})
+                        </Button>
+                    )}
                 </div>
-            </nav>
+            </h1>
         </div>
     );
 };
