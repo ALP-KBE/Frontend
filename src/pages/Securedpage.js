@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import Button from "../components/Button";
-import Nav from "../components/Nav"
-const Securedpage = ({loggedInUser,logOut,components}) => {
+import {useKeycloak} from "@react-keycloak/web";
 
+const Securedpage = ({components}) => {
+    const {keycloak, initialized} = useKeycloak();
     const [allProductComponentsAreShown, setAllProductComponentsAreShown] = useState(false)
 
     return (

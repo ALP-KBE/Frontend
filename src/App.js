@@ -3,7 +3,6 @@ import {ReactKeycloakProvider} from "@react-keycloak/web";
 import keycloak from "./keycloak"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Nav from "./components/Nav";
-import WelcomePage from "./pages/Homepage";
 import SecuredPage from "./pages/Securedpage";
 import PrivateRoute from "./helpers/PrivateRoute";
 
@@ -25,10 +24,7 @@ const App = () => {
                 <Nav />
                 <BrowserRouter>
                     <Routes>
-                        <Route exact path="/" element={<WelcomePage />} />
-                        <Route
-                            path="/secured"
-                            element={
+                        <Route path="/" element={
                                 <PrivateRoute>
                                     <SecuredPage components={components}/>
                                 </PrivateRoute>
