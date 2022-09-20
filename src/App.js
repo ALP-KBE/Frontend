@@ -8,15 +8,20 @@ import PrivateRoute from "./helpers/PrivateRoute";
 
 const App = () => {
 
-    const [components, setComponents] = useState('');
+    const [productComponents, setProductComponents] = useState('');
 
     useEffect(() => {
-        fetch('/components')
-            .then(response => response.text())
-            .then(components => {
-                setComponents(components);
-            });
+        const getProductComponents = async () => {
+            const productComponentsFromServer = await fetchProductComponents()
+            setProductComponents(productComponentsFromServer)
+        }
+        getProductComponents()
     }, [])
+    const fetchProductComponents = async () => {
+        const res = await fetch('/components')
+        const data = await res.json()
+        return data
+    }
 
     return (
         <div>
@@ -26,7 +31,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={
                                 <PrivateRoute>
-                                    <SecuredPage components={components}/>
+                                    <SecuredPage productComponents={productComponents}/>
                                 </PrivateRoute>
                             }
                         />
