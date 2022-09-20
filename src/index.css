@@ -97,7 +97,7 @@ body {
 }
 
 .btnSmall:active {
-  transform: scale(0.78);
+  transform: scale(0.98);
 }
 
 .btnSmall-block {
@@ -119,10 +119,6 @@ body {
 }
 .task:focus {
   outline: none;
-}
-
-.task:active {
-  transform: scale(0.78);
 }
 
 .task {

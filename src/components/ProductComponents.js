@@ -14,7 +14,7 @@ const ProductComponents = ({productComponents, allProductComponentsAreShown}) =>
 
     return (
         <div>
-            <div style={{float: 'left', width: '40%'}}>{productComponentList}</div>
+            <div style={{float: 'left'}}>{productComponentList}</div>
         </div>
     )
 }

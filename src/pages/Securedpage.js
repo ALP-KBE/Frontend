@@ -14,7 +14,7 @@ const Securedpage = ({productComponents}) => {
                 setAllProductComponentsAreShown(false)}}/> : <Button cssClass={"btn"} text={'Produktkomponenten'} onClick={() => {
                 setAllProductComponentsAreShown(true)}}/>}
 
-            <Button cssClass={"btn"} text={'Meine Gitarren'}/>
+            <Button cssClass={"btn"} text={'Warenkorb'}/>
             <Button cssClass={"btn"} text={'Währung'}/>
 
             <ProductComponents productComponents={productComponents}
