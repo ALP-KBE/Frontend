@@ -77,7 +77,33 @@ body {
   display: block;
   width: 100%;
 }
+.lightGreyField {
+  display: inline-block;
+  background: lightgray;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: inherit;
+}
 
+.lightGreyField:focus {
+  outline: none;
+}
+.itemGrey {
+  display: inline-block;
+  color: black;
+  border: thin solid black;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: inherit;
+}
 .btnSmall {
   display: inline-block;
   background: lightgray;
@@ -105,13 +131,59 @@ body {
   width: 100%;
 }
 
+.darkGreyField {
+  display: inline-block;
+  background: #606060;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 7px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 10px;
+  font-family: inherit;
+}
+
+.darkGreyField:focus {
+  outline: none;
+}
+
+.btnSmallest {
+  display: inline-block;
+  background: #606060;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 10px;
+  font-family: inherit;
+}
+
+.btnSmallest:focus {
+  outline: none;
+}
+
+.btnSmallest:active {
+  transform: scale(0.98);
+}
+
+.btnSmallest-block {
+  display: block;
+  width: 100%;
+}
+
 .task {
   display: inline-block;
   background: lightgray;
   color: black;
   border: none;
   padding: 10px 10px;
-  margin: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 20px;
   border-radius: 5px;
   text-decoration: none;
   font-size: 12px;
@@ -131,12 +203,38 @@ body {
   justify-content: space-between;
 }
 
+.task2 {
+  display: inline-block;
+  color: black;
+  border: none;
+  padding: 10px 10px;
+  margin-left: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: inherit;
+}
+.task2:focus {
+  outline: none;
+}
+
+.task2 {
+  display: block;
+  width: 100%;
+}
+.task2 h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .add-form {
   margin-bottom: 40px;
 }
 
 .form-control {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .form-control label {
@@ -145,7 +243,7 @@ body {
 
 .form-control input {
   width: 100%;
-  height: 40px;
+  height: 25px;
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;

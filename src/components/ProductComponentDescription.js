@@ -1,7 +1,12 @@
-const ProductComponentDescription = ({productComponent}) => {
+import Button from "./Button";
+
+const ProductComponentDescription = ({createCustomProduct,productComponent, shoppingCartSystemActive}) => {
+    const handleClick = () => {
+        createCustomProduct(productComponent)
+    }
     return(
         <div className={'task'}>
-            <p>Name: {productComponent.name}</p>
+            <p>Komponententyp: {productComponent.komponententyp}</p>
             <p>Herkunft: {productComponent.herkunft}</p>
             <p>Farbe: {productComponent.farbe}</p>
             <p>Hersteller: {productComponent.hersteller}</p>
@@ -10,6 +15,9 @@ const ProductComponentDescription = ({productComponent}) => {
             <p>Preis: {productComponent.preis}</p>
             <p>Verfügbarkeit: {productComponent.verfuegbarkeit}</p>
             <p>Klangauswirkung: {productComponent.klangauswirkung}</p>
+            {shoppingCartSystemActive && <Button cssClass={"btnSmallest"}
+                                                 onClick={handleClick}
+                                                 text={'Hinzufügen'}/>}
             <br/>
         </div>
     )

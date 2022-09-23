@@ -1,22 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import ProductComponent from "./ProductComponent";
+import Button from "./Button";
 
-const ProductComponents = ({productComponents, allProductComponentsAreShown}) => {
-    let productComponentList;
-
-    if (allProductComponentsAreShown) {
-        productComponentList = productComponents.map((productComponent) => (
-            <ProductComponent productComponent={productComponent}/>
-        ));
-    }else{
-        productComponentList=<div></div>;
-    }
+const ProductComponents = ({productComponents, allProductComponentsAreShown, shoppingCartSystemActive}) => {
+    console.log('productComponents: '+productComponents);
+    let productComponentList = productComponents.map((productComponent) => (
+        <ProductComponent productComponent={productComponent}
+                          shoppingCartSystemActive={shoppingCartSystemActive}
+        />
+    ));
 
     return (
         <div>
-            <div style={{float: 'left'}}>{productComponentList}</div>
+            {allProductComponentsAreShown && <div style={{float: 'left'}} className={'itemGrey'}>{productComponentList}</div>}
         </div>
     )
 }
-
 export default ProductComponents

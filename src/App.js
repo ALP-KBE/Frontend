@@ -8,21 +8,6 @@ import PrivateRoute from "./helpers/PrivateRoute";
 
 const App = () => {
 
-    const [productComponents, setProductComponents] = useState('');
-
-    useEffect(() => {
-        const getProductComponents = async () => {
-            const productComponentsFromServer = await fetchProductComponents()
-            setProductComponents(productComponentsFromServer)
-        }
-        getProductComponents()
-    }, [])
-    const fetchProductComponents = async () => {
-        const res = await fetch('/components')
-        const data = await res.json()
-        return data
-    }
-
     return (
         <div>
             <ReactKeycloakProvider authClient={keycloak}>
@@ -31,7 +16,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={
                                 <PrivateRoute>
-                                    <SecuredPage productComponents={productComponents}/>
+                                    <SecuredPage/>
                                 </PrivateRoute>
                             }
                         />
