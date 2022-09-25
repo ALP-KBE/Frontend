@@ -18,7 +18,6 @@ const CustomProduct = ({emptyCustomProduct,customProduct}) => {
         for (let i = 0; i < customProduct.length; i++) {
             componentsForBackend = [...componentsForBackend, customProduct[i].name];
         }
-        console.log(productNameForBackend+componentsForBackend);
         var url='/components/';
         url= url + productNameForBackend;
         const res = await fetch(url, {
@@ -28,7 +27,6 @@ const CustomProduct = ({emptyCustomProduct,customProduct}) => {
             },
             body: JSON.stringify(customProduct)
         })
-        console.log(res)
         const data = res.ok //await res
         if(data){
             setProductCreationFeedbackMsg(productName+' wurde hinzugefügt');

@@ -2,8 +2,6 @@ import React from "react";
 
 
 const Product = ({product, currency}) => {
-    console.log('product: ' + product);
-
     return (
         <div className={'task'}>
             {Object.keys(product).map(key => {

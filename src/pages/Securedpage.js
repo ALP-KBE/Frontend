@@ -8,10 +8,10 @@ import Products from "../components/Products";
 const Securedpage = () => {
     const [allProductComponentsAreShown, setAllProductComponentsAreShown] = useState(false)
     const [shoppingCartSystemActive, setShoppingCartSystemActive] = useState(false)
-    const [currency, setCurrency] = useState('Dollar')
+    const [currency, setCurrency] = useState('riel')
     const [currencyTabActive, setCurrencyTabActive] = useState(false)
     const [productComponents, setProductComponents] = useState([])
-    const [productsAreShown, setProductsAreShown] =useState(false)
+    const [productsAreShown, setProductsAreShown] = useState(false)
 
     const [products, setProducts] = useState([
         {
@@ -27,33 +27,46 @@ const Securedpage = () => {
         },
     ]);
 
+    /*    const updateComponentsWithRightCurrency = (currency) => {
+            useEffect(() => {
+                const getProductComponents = async () => {
+                    const productComponentsFromServer = await fetchProductComponents(currency)
+                    setProductComponents(productComponentsFromServer)
+                }
+                getProductComponents()
+            }, )
+        }
+
+
+    const getComponents = async (currency) => {
+        let url = '/components?currency=';
+        url = url + currency;
+        const res = await fetch(url, {
+            method: 'GET'
+        })
+        const data = await res.json()
+        console.log(data);
+        console.log(res);
+        setProductComponents(data);
+    }
+*/
     useEffect(() => {
         const getProductComponents = async () => {
             const productComponentsFromServer = await fetchProductComponents()
+            console.log(productComponentsFromServer)
             setProductComponents(productComponentsFromServer)
         }
         getProductComponents()
-    }, []) //add currency and productComponents as dps
+    }, [])
 
     const fetchProductComponents = async () => {
-        const res = await fetch('/components')
+        var url = '/components?currency=';
+        url = url + currency;
+        const res = await fetch(url)
+        console.log(res);
         const data = await res.json()
         return data
     }
-    /*
-        useEffect(() => {
-            const getProducts = async () => {
-                const producsFromServer = await fetchProducts()
-                setProducts(productsFromServer)
-            }
-            getProducts()
-        }, []) //add currency and products as dps
-
-        const fetchProductComponents = async () => {
-            const res = await fetch('/components')
-            const data = await res.json()
-            return data
-        }*/
 
     const setNewCurrency = currency => {
         setCurrency(currency)
@@ -96,12 +109,13 @@ const Securedpage = () => {
                 setShoppingCartSystemActive(false)
                 setProductsAreShown(false)
                 setCurrencyTabActive(true)
-            }}/>}<Currency currencyTabActive={currencyTabActive} setNewCurrency={setNewCurrency}/>
+            }}/>}<Currency currency={currency} currencyTabActive={currencyTabActive} setNewCurrency={setNewCurrency}/>
 
             <ProductComponents productComponents={productComponents}
                                allProductComponentsAreShown={allProductComponentsAreShown}
             />{shoppingCartSystemActive && <ProductCreation productComponents={productComponents}
-                                                            shoppingCartSystemActive={shoppingCartSystemActive}/>}<Products productsAreShown={productsAreShown} currency={currency} products={products}/>
+                                                            shoppingCartSystemActive={shoppingCartSystemActive}/>}<Products
+            productsAreShown={productsAreShown} currency={currency} products={products}/>
 
         </div>
     )

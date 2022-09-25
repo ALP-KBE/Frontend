@@ -3,9 +3,8 @@ import ProductComponent from "./ProductComponent";
 import Button from "./Button";
 
 const ProductComponents = ({productComponents, allProductComponentsAreShown, shoppingCartSystemActive}) => {
-    console.log('productComponents: '+productComponents);
     let productComponentList = productComponents.map((productComponent) => (
-        <ProductComponent productComponent={productComponent}
+        <ProductComponent key={productComponent.name} productComponent={productComponent}
                           shoppingCartSystemActive={shoppingCartSystemActive}
         />
     ));

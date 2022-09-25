@@ -15,21 +15,7 @@ const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
     const emptyCustomProduct = () => {
         setCustomProduct([])
     }
-/*
-    const addComponentToShoppingCart = (productComponent) => {
-        setShoppingCart(shoppingCart => [...shoppingCart, {
-            "komponententyp": productComponent.komponententyp,
-            "name": productComponent.name,
-            "herkunft": productComponent.herkunft,
-            "farbe": productComponent.farbe,
-            "hersteller": productComponent.hersteller,
-            "form": productComponent.form,
-            "gebrauchszustand": productComponent.gebrauchszustand,
-            "preis": productComponent.preis,
-            "verfuegbarkeit": productComponent.verfuegbarkeit,
-            "klangauswirkung": productComponent.klangauswirkung,
-        }])
-    }*/
+
     let productComponentList;
 
     if (shoppingCartSystemActive) {
