@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:8080/auth",
+  "url": "http://localhost:11111/auth",
   "realm": "keycloak-react-auth",
   "clientId": "react-auth"
 }

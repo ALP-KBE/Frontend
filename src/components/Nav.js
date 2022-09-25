@@ -12,6 +12,7 @@ const Nav = () => {
                 <div>
                     {!keycloak.authenticated && (
                         <Button
+                            cssClass={"btn"}
                             onClick={() => {keycloak.login();}}
                             text={'Login'}
                         >
@@ -20,6 +21,7 @@ const Nav = () => {
 
                     {!!keycloak.authenticated && (
                         <Button
+                            cssClass={"btn"}
                             text={'Logout'}
                             onClick={() => keycloak.logout()}>
                             Logout ({keycloak.tokenParsed.preferred_username})
