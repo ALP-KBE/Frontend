@@ -11,6 +11,10 @@ const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
     const createCustomProduct = customProductComponent => {
         setCustomProduct(customProduct => [...customProduct,customProductComponent])
     }
+
+    const emptyCustomProduct = () => {
+        setCustomProduct([])
+    }
 /*
     const addComponentToShoppingCart = (productComponent) => {
         setShoppingCart(shoppingCart => [...shoppingCart, {
@@ -46,7 +50,7 @@ const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
 
     return (
         <div>
-            <div style={{float: 'left'}} className={'itemGrey'} >{productComponentList}</div>{customProductCreated && <CustomProduct customProduct={customProduct}/>}
+            <div style={{float: 'left'}} className={'itemGrey'} >{productComponentList}</div>{customProductCreated && <CustomProduct emptyCustomProduct={emptyCustomProduct} customProduct={customProduct}/>}
         </div>
     )
 }

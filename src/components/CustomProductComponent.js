@@ -1,6 +1,7 @@
 import React from "react";
 
 const CustomProductComponent = ({customProductComponent}) => {
+
     return (
         <div>
             <p className={'itemGrey'}>{customProductComponent.name}</p>

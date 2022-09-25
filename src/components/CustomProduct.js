@@ -2,21 +2,40 @@ import React, {useState} from "react";
 
 import CustomProductComponent from "./CustomProductComponent";
 
-const CustomProduct = ({customProduct}) => {
+const CustomProduct = ({emptyCustomProduct,customProduct}) => {
 
     const [productName, setProductName] = useState('')
+    const [productCreationFeedbackMsg, setProductCreationFeedbackMsg] = useState('')
 
     let customProductComponents = customProduct.map((customProductComponent) => (
         <CustomProductComponent customProductComponent={customProductComponent}/>
     ));
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        let productFormatForBackend=[{'id': productName}];
-        for(let i=0; i<customProduct.length; i++){
-            productFormatForBackend= [...productFormatForBackend, {[i]: customProduct[i].name}];
+        let productNameForBackend=productName;
+        var componentsForBackend = [];
+        for (let i = 0; i < customProduct.length; i++) {
+            componentsForBackend = [...componentsForBackend, customProduct[i].name];
         }
-        console.log(productFormatForBackend);
+        console.log(productNameForBackend+componentsForBackend);
+        var url='/components/';
+        url= url + productNameForBackend;
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(customProduct)
+        })
+        console.log(res)
+        const data = res.ok //await res
+        if(data){
+            setProductCreationFeedbackMsg(productName+' wurde hinzugefügt');
+            setProductName('');
+            emptyCustomProduct();
+        }
+
     }
 
     return (
@@ -33,6 +52,7 @@ const CustomProduct = ({customProduct}) => {
                 <div>{customProductComponents}</div>
                 <input type={'submit'} value={'Produkt erstellen'} className={'btnSmallest'}/>
                 <br/>
+                {productCreationFeedbackMsg}
             </form>
         </div>
     )
