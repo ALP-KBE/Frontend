@@ -2,13 +2,13 @@ import React, {useState} from "react";
 
 import CustomProductComponent from "./CustomProductComponent";
 
-const CustomProduct = ({emptyCustomProduct,customProduct}) => {
+const CustomProduct = ({currency, changeProducts, emptyCustomProduct,customProduct}) => {
 
     const [productName, setProductName] = useState('')
     const [productCreationFeedbackMsg, setProductCreationFeedbackMsg] = useState('')
 
     let customProductComponents = customProduct.map((customProductComponent) => (
-        <CustomProductComponent customProductComponent={customProductComponent}/>
+        <CustomProductComponent key={customProductComponent.name} customProductComponent={customProductComponent}/>
     ));
 
     const onSubmit = async (e) => {
@@ -20,6 +20,8 @@ const CustomProduct = ({emptyCustomProduct,customProduct}) => {
         }
         var url='/components/';
         url= url + productNameForBackend;
+        console.log(url)
+        console.log(customProduct)
         const res = await fetch(url, {
             method: 'POST',
             headers: {
@@ -27,11 +29,14 @@ const CustomProduct = ({emptyCustomProduct,customProduct}) => {
             },
             body: JSON.stringify(customProduct)
         })
+        console.log(res)
         const data = res.ok //await res
+        console.log(res.ok)
         if(data){
             setProductCreationFeedbackMsg(productName+' wurde hinzugefügt');
             setProductName('');
             emptyCustomProduct();
+            changeProducts(currency);
         }
 
     }

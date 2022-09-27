@@ -3,7 +3,7 @@ import ProductComponent from "./ProductComponent";
 import CustomProductComponent from "./CustomProductComponent";
 import CustomProduct from "./CustomProduct";
 
-const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
+const ProductCreation = ({currency, changeProducts, productComponents, shoppingCartSystemActive}) => {
 
     const [customProduct, setCustomProduct] = useState([]);
     const [customProductCreated, setCustomProductCreated] = useState(false);
@@ -20,7 +20,7 @@ const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
 
     if (shoppingCartSystemActive) {
         productComponentList = productComponents.map((productComponent) => (
-            <ProductComponent productComponent={productComponent}
+            <ProductComponent key={productComponent.name} productComponent={productComponent}
                               shoppingCartSystemActive={shoppingCartSystemActive}
                               createCustomProduct={createCustomProduct}
             />
@@ -36,7 +36,7 @@ const ProductCreation = ({productComponents, shoppingCartSystemActive}) => {
 
     return (
         <div>
-            <div style={{float: 'left'}} className={'itemGrey'} >{productComponentList}</div>{customProductCreated && <CustomProduct emptyCustomProduct={emptyCustomProduct} customProduct={customProduct}/>}
+            <div style={{float: 'left'}} className={'itemGrey'} >{productComponentList}</div>{customProductCreated && <CustomProduct currency={currency} changeProducts={changeProducts} emptyCustomProduct={emptyCustomProduct} customProduct={customProduct}/>}
         </div>
     )
 }

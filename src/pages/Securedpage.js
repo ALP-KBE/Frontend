@@ -8,63 +8,54 @@ import Products from "../components/Products";
 const Securedpage = () => {
     const [allProductComponentsAreShown, setAllProductComponentsAreShown] = useState(false)
     const [shoppingCartSystemActive, setShoppingCartSystemActive] = useState(false)
-    const [currency, setCurrency] = useState('riel')
+    const [currency, setCurrency] = useState('dollar')
     const [currencyTabActive, setCurrencyTabActive] = useState(false)
     const [productComponents, setProductComponents] = useState([])
     const [productsAreShown, setProductsAreShown] = useState(false)
+    const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([
-        {
-            "id": "Johannes sein Paket",
-            "component1": "Ahornhals",
-            "price": '20'
-        },
-        {
-            "id": "Frisches vom Markt",
-            "component1": "Rollensteg",
-            "component2": "Ahornhals",
-            "price": '30'
-        },
-    ]);
-
-    /*    const updateComponentsWithRightCurrency = (currency) => {
-            useEffect(() => {
-                const getProductComponents = async () => {
-                    const productComponentsFromServer = await fetchProductComponents(currency)
-                    setProductComponents(productComponentsFromServer)
-                }
-                getProductComponents()
-            }, )
-        }
-
-
-    const getComponents = async (currency) => {
-        let url = '/components?currency=';
-        url = url + currency;
-        const res = await fetch(url, {
-            method: 'GET'
-        })
-        const data = await res.json()
-        console.log(data);
-        console.log(res);
-        setProductComponents(data);
-    }
-*/
     useEffect(() => {
-        const getProductComponents = async () => {
-            const productComponentsFromServer = await fetchProductComponents()
-            console.log(productComponentsFromServer)
-            setProductComponents(productComponentsFromServer)
-        }
-        getProductComponents()
+        getProductComponents(currency)
     }, [])
 
-    const fetchProductComponents = async () => {
+    const getProductComponents = async (currency) => {
+        const productComponentsFromServer = await fetchProductComponents(currency)
+        console.log(productComponentsFromServer)
+        setProductComponents(productComponentsFromServer)
+    }
+
+    const fetchProductComponents = async (currency) => {
         var url = '/components?currency=';
         url = url + currency;
+        console.log(url)
         const res = await fetch(url)
-        console.log(res);
         const data = await res.json()
+        console.log(res)
+        return data
+    }
+
+    useEffect(() => {
+        console.log('changeProducts')
+        changeProducts(currency)
+    }, [])
+
+    const changeProducts = async (currency) => {
+        const productsFromServer = await fetchProducts(currency)
+        console.log(productsFromServer)
+        setProducts(productsFromServer)
+    }
+
+   /* const addProductsToStateArray = (productsFromServer) => {
+        setProducts(products => [...products,productsFromServer])
+    }*/
+
+    const fetchProducts = async (currency) => {
+        var url = '/products?currency=';
+        url = url + currency;
+        console.log(url);
+        const res = await fetch(url)
+        const data = await res.json()
+        console.log(res);
         return data
     }
 
@@ -109,11 +100,11 @@ const Securedpage = () => {
                 setShoppingCartSystemActive(false)
                 setProductsAreShown(false)
                 setCurrencyTabActive(true)
-            }}/>}<Currency currency={currency} currencyTabActive={currencyTabActive} setNewCurrency={setNewCurrency}/>
+            }}/>}<Currency getProductComponents={getProductComponents} currency={currency} currencyTabActive={currencyTabActive} setNewCurrency={setNewCurrency}/>
 
             <ProductComponents productComponents={productComponents}
                                allProductComponentsAreShown={allProductComponentsAreShown}
-            />{shoppingCartSystemActive && <ProductCreation productComponents={productComponents}
+            />{shoppingCartSystemActive && <ProductCreation changeProducts={changeProducts} currency={currency} productComponents={productComponents}
                                                             shoppingCartSystemActive={shoppingCartSystemActive}/>}<Products
             productsAreShown={productsAreShown} currency={currency} products={products}/>
 
